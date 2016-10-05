@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DEMO!</title>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script>
+    (function($) {
+      $(document).ready(function() {
+
+        $('#stuffPost').on('click', function(e) {
+          var customText = $('#stuffPostInput').val();
+          $.post('/article/new', { 'message': customText }, function(data) {
+            console.log(data);
+            $('#log').html(data);
+          });
+        });
+
+        $('#stuffGet').on('click', function(e) {
+          var customId = $('#stuffGetInput').val();
+          $.get('/article/' + customId, function(data) {
+            console.log(data);
+          });
+        });
+
+      });
+    })(jQuery);
+  </script>
+
+</head>
+<body>
+<h1>Hello from a twig file</h1>
+<p>And also hello {{ name }}</p>
+<input id="stuffPostInput" type="text">
+<button id="stuffPost">Make request to Silex post route!</button>
+<hr>
+<input id="stuffGetInput" type="text"></input>
+<button id="stuffGet">Call json GET route</button>
+<hr>
+<p id="log"></p>
+</body>
+</html>
